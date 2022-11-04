@@ -14,17 +14,20 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# ▲ BASE_DIR переменная, которая получает директорию в которой расположен manage.py
+# Трансляция 2022.02.23 1:15:01
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from .key.key_django import SECRET_KEY
+from .keys.key_django import SECRET_KEY
 """
 SECRET_KEY = ''
 Moved 27.10.2022 15:40 to a file "key_django" before the zero commit
 """
+
+from .path.path_psql_key import PGPASS
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,13 +80,60 @@ WSGI_APPLICATION = 'Apiary_online.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+
+# read_pgpass added 04.11.2022
+"""
+    Reads the pgpass. Returns the postgres settings dict for Django.
+
+    :param str dbname:
+    :return dict:
+    """
+def read_pgpass(pgpass, dbname):
+
+    import os
+
+    try:
+        pgpass_lines = open(pgpass).read().split()
+    except IOError:
+        print(
+            """
+            You don't have a ~/.pgpass file so we're using a sqlite database.
+
+            To switch to a PostgreSQL database, create a ~/.pgpass file
+            containing it's credentials.
+            See http://www.postgresql.org/docs/14/static/libpq-pgpass.html
+            """
+            )
+    else:
+        for line in pgpass_lines:
+            words = line.strip().split(':')
+            if words[2] == dbname:
+                return {
+                    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                    # 'PORT': ????
+                    'HOST': words[0],
+                    'NAME': dbname,
+                    'USER': words[3],
+                    'PASSWORD': words[4],
+
+                }
+        print ('No such database ' + dbname + ' in your pgpass file')
+    return {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+DATABASES = {
+    'default': read_pgpass(PGPASS, 'apiary_online')
 }
 
+"""
+04.11.2022 ▼ (-)
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    {
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

@@ -1,12 +1,17 @@
 # https://djangowaves.com/tips-tricks/gitignore-for-a-django-project/ #
 
 #safety#
-key
+keys
+path
 
 # Django #
 *.log
 *.pot
 *.pyc
+
+*.swp
+# ▲ added by me 03.11.2022
+
 __pycache__
 db.sqlite3
 media
