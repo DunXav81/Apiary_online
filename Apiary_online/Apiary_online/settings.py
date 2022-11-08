@@ -27,8 +27,6 @@ SECRET_KEY = ''
 Moved 27.10.2022 15:40 to a file "key_django" before the zero commit
 """
 
-from .path.path_psql_key import PGPASS
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -88,9 +86,10 @@ WSGI_APPLICATION = 'Apiary_online.wsgi.application'
     :param str dbname:
     :return dict:
     """
-def read_pgpass(pgpass, dbname):
 
-    import os
+from .path.path_psql_key import PGPASS
+
+def read_pgpass(pgpass, dbname):
 
     try:
         pgpass_lines = open(pgpass).read().split()

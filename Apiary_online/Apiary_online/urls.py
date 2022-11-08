@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.views.debug import default_urlconf
 
-urlpatterns = [    
+urlpatterns = [
+    path('', default_urlconf),
     path('admin/', admin.site.urls),
     path('scales_apiary/', include('scales_apiary.urls')),
 ]
