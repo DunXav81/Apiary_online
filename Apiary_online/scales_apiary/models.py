@@ -29,6 +29,9 @@ class Weather_3(models.Model):
     wind_power_api = models.IntegerField(default=0)
     wind_direction_api = models.CharField(max_length=20)
     weather_description_api = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return str (self.air_temperature_sensor)
 
 # date_time_weight_fixation = models.ForeignKey(Weight_2, on_delete=models.CASCADE)
 # ▲ Попробовать в случае активации связей с Weight_2.date_time_weight_fixation
