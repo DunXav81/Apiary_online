@@ -35,7 +35,7 @@ def main_page(request):
     '''
     
     ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-          с множеством значений в столбце '''
+          с множеством значений в одном столбце
     meteo_data_all = Weather_3.objects.all()
     
     context = {
@@ -43,6 +43,24 @@ def main_page(request):
         'meteo_data_array': meteo_data_all
     }
     
+    return render(
+        request,
+        'scales_apiary/meteo_data_table.html',
+        context
+    )
+    '''
+
+    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+              с множеством значений в двух столбцах'''
+    meteo_data_all = Weather_3.objects.all()
+
+    print (meteo_data_all[0])
+
+    context = {
+        #'meteo_data_0': str(meteo_data_all[0])
+        'meteo_data_array': meteo_data_all
+    }
+
     return render(
         request,
         'scales_apiary/meteo_data_table.html',

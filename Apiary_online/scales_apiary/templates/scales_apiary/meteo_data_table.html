@@ -1,15 +1,15 @@
-<h1>Таблица метеорологических данных </h1>
+<table border = "3", cellpadding = "3", width = "100%">
+	<caption><h2>Таблица метеорологических данных </h2></caption>
+	<tr>
+		<th>дата и время фиксации метео данных</th>
+		<th>температура воздуха (датчик), °C</th>
+	</tr>
+	{% for meteo_data_1 in meteo_data_array %}
+	<tr>
+		<td>данные</td>
+		<td>{{meteo_data_1}}</td>
+	</tr>
+	{% endfor %}
+	</table>
 
-<table border = "3", width = "100%">
-<tr>
-    <th>дата и время фиксации метео данных</th>
-    <th>температура воздуха (датчик), °C</th>
-</tr>
-{% for meteo_data_1 in meteo_data_array %}
-<tr>
-    <td>данные</td>
-    <td>{{meteo_data_1}}</td>
-</tr>
-{% endfor %}
-</table>
-
+    
