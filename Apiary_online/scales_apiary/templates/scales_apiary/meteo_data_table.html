@@ -4,10 +4,11 @@
 		<th>дата и время фиксации метео данных</th>
 		<th>температура воздуха (датчик), °C</th>
 	</tr>
-	{% for meteo_data_1 in meteo_data_array %}
+	{% for row in meteo_data_array %}
 	<tr>
-		<td>данные</td>
-		<td>{{meteo_data_1}}</td>
+		{% for data in row %}
+		<td>{{data}}</td>
+		{% endfor %}
 	</tr>
 	{% endfor %}
 	</table>
