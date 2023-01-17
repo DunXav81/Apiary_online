@@ -31,7 +31,10 @@ class Weather_3(models.Model):
     weather_description_api = models.CharField(max_length=100)
     
     def __str__(self):
-        return str (self.date_time_fixing_values) + str(self.air_temperature_sensor) + str(self.air_temperature_api)
+        return str (self.id) + "; " + str (self.date_time_fixing_values) + "; " + str(self.air_temperature_sensor) + "; " + str(
+        self.air_temperature_api) + "; " + str(self.air_humidity_sensor) + "; " + str(self.air_humidity_api) + "; " + str(
+        self.atmospheric_pressure_api) + "; " + str(self.wind_power_api) + "; " +  str(self.wind_direction_api) + "; " + str(
+        self.weather_description_api)
 
 # date_time_weight_fixation = models.ForeignKey(Weight_2, on_delete=models.CASCADE)
 # ▲ Попробовать в случае активации связей с Weight_2.date_time_weight_fixation
