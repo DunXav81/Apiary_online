@@ -12,6 +12,9 @@ path
 *.swp
 # ▲ added by me 03.11.2022
 
+# static files
+img/
+
 __pycache__
 db.sqlite3
 media

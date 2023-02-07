@@ -55,10 +55,14 @@ def main_page(request):
     meteo_data_all = Weather_3.objects.all()
 
     print (meteo_data_all[0])
+    # ▲ данная команда выводит на печать в cmd при запуске сервера
+
+    row = 3
+    # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
         #'meteo_data_0': str(meteo_data_all[0])
-        'meteo_data_array': meteo_data_all
+        'meteo_data_array': meteo_data_all[:row]
     }
 
     return render(

@@ -1,6 +1,27 @@
-<table border = "3", cellpadding = "3", width = "100%">
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang = "en">
+
+<head>
+	<meta charset="UTF-8">
+	<title> Weather page </title>
+	<!-- <script src = {% static "test_static_js.js" %}></script> -->
+	<!-- ▲ Подключение статического контента (Js) ▲ -->
+	<!-- ▼ Возможны также варианты кода ниже ▼ -->
+	<!-- <script src = "{% static 'test_static_js.js' %}"> -->
+	<!-- <script src = "/static/test_static_js.js"> -->
+	<link rel="stylesheet" href = {% static 'css/main.css' %} >
+</head>
+
+<body>
+
+<table> <!-- border = "3", bordercolor = "blue", cellpadding = "3", width = "100%" -->
+
 	<caption><h2>Таблица метеорологических данных </h2></caption>
-	<tr>
+
+	<tr> <!--  bgcolor = 'steelblue' -->
 	    <th> Порядковый номер фиксации метео данных (ID) </th>
 		<th> Дата и время фиксации метео данных </th>
 		<th> Температура воздуха (датчик), °C </th>
@@ -8,42 +29,34 @@
 		<th> Влажность воздуха (датчик), % </th>
 		<th> Влажность воздуха (API), % </th>
 		<th> Атмосферное давление (API), мм рт. ст. </th>
-		<th> Сила ветра, м/с </th>
-		<th> Направление ветра </th>
+		<th> Сила ветра (API), м/с </th>
+		<th> Направление ветра (API) </th>
 		<th> Описание погоды (API) </th>
 	</tr>
 
 	<!--
 
-	{% for meteo_data_1 in meteo_data_array %}
-    <tr>
-		<td>данные</td>
-		<td>{{meteo_data_1}}</td>
-	</tr>
-	{% endfor %}
-	</table>
-
-	<tr>
-		<td>данные</td>
-		<td>{{meteo_data_array}}</td>
-	</tr>
-
 	API – Application Programming Interface, что значит программный интерфейс приложения.
-
 
 	-->
 
     {% for el in meteo_data_array %}
-	<tr>
-	    <td width="8.5%" align="center" valign="top">{{el.id}}</td>
-		<td width="12.7%" align="center" valign="top">{{el.date_time_fixing_values}}</td>
-		<td width="11.9%" align="center" valign="top">{{el.air_temperature_sensor}}</td>
-		<td width="10.2%" align="center" valign="top">{{el.air_temperature_api}}</td>
-		<td width="11.0%" align="center" valign="top">{{el.air_humidity_sensor}}</td>
-		<td width="9.3%" align="center" valign="top">{{el.air_humidity_api}}</td>
-		<td width="11.0%" align="center" valign="top">{{el.atmospheric_pressure_api}}</td>
-		<td width="4.2%" align="center" valign="top">{{el.wind_power_api}}</td>
-		<td width="5.9%" align="center" valign="top">{{el.wind_direction_api}}</td>
-		<td width="15.3%" align="left" valign="top">{{el.weather_description_api}}</td>
+	<tr> <!-- bgcolor = 'skyblue' -->
+	    <td width="8.5%">{{el.id}}</td>
+		<td width="12.7%">{{el.date_time_fixing_values|date:"Y.m.d H:i" }}</td>
+		<td width="11.9%">{{el.air_temperature_sensor}}</td>
+		<td width="10.2%">{{el.air_temperature_api}}</td>
+		<td width="11.0%">{{el.air_humidity_sensor}}</td>
+		<td width="9.3%">{{el.air_humidity_api}}</td>
+		<td width="11.0%">{{el.atmospheric_pressure_api}}</td>
+		<td width="5.2%">{{el.wind_power_api}}</td>
+		<td width="5.9%">{{el.wind_direction_api}}</td>
+		<td width="14.3%" class = "weather_description">
+		    {{el.weather_description_api}} <img src={% static 'img/Тучка2.jpg' %} alt="тучка"></td>
 	</tr>
 	{% endfor %}
+
+</table>
+
+</body>
+</html> 
