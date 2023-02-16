@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from .models import Weather_3
+from .models import Weight_2
 
 def main_page(request):
 
@@ -70,3 +71,62 @@ def main_page(request):
         'scales_apiary/meteo_data_table.html',
         context
     )
+    
+def weight_page(request):
+    
+    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+          с одним значением в столбце '''
+    weight_beehives_all = Weight_2.objects.all()
+    
+    print (weight_beehives_all[0])
+    # ▲ данная команда выводит на печать в cmd при запуске сервера
+    
+    context = {
+        #'meteo_data_0': str(meteo_data_all[0])
+        'weight_beehive_1': str(weight_beehives_all[1])
+    }
+    
+    return render(
+        request,
+        'scales_apiary/beehive_weights_table.html',
+        context
+    )
+    
+    
+    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+          с множеством значений в одном столбце
+    meteo_data_all = Weather_3.objects.all()
+    
+    context = {
+        #'meteo_data_0': str(meteo_data_all[0])
+        'meteo_data_array': meteo_data_all
+    }
+    
+    return render(
+        request,
+        'scales_apiary/meteo_data_table.html',
+        context
+    )
+    '''
+
+    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+              с множеством значений в двух столбцах
+    meteo_data_all = Weather_3.objects.all()
+
+    print (meteo_data_all[0])
+    # ▲ данная команда выводит на печать в cmd при запуске сервера
+
+    row = 3
+    # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
+
+    context = {
+        #'meteo_data_0': str(meteo_data_all[0])
+        'meteo_data_array': meteo_data_all[:row]
+    }
+
+    return render(
+        request,
+        'scales_apiary/meteo_data_table.html',
+        context
+    )
+    '''

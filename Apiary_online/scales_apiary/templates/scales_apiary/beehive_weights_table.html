@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Weights page </title>
+</head>
+<body>
+    <a href="#"> Таблица привеса ульев </a>
+    <img src="{% static 'img/Cloud.jpg' %}" />
+    <div class="weight">
+        <table>
+        
+            <caption><h2>Таблица привеса ульев</h2></caption>
+        
+            <tr>
+                <th> Порядковый номер фиксации веса улья (ID) </th>
+                <th> Номер улья </th>
+                <th> Дата и время фиксации веса улья </th>
+                <th> Вес улья, гр </th>
+            </tr>
+        
+            {% for el in beehive_weights_data_array %}
+            <tr>
+                <td width="25%">{{el.id}}</td>
+                <td width="25%">{{el.beehive_number_id}}</td>
+                <td width="25%">{{el.date_time_weight_fixation|date:"Y.m.d H:i"}}</td>
+                <td width="25%">{{el.weight_beehive}}</td>
+            </tr>
+            {% endfor %}
+        
+        </table>
+        </div>
+        
+</body>
+</html>

@@ -18,7 +18,10 @@ class Weight_2(models.Model):
     date_time_weight_fixation = models.DateTimeField('date and time of weighing')
     weight_beehive = models.PositiveIntegerField(default=1)
 
-
+    def __str__(self):
+        return str (self.id) + "; " + str (self.beehive_number) + "; " + str(self.date_time_weight_fixation) + "; " + str(
+        self.weight_beehive)
+        
 class Weather_3(models.Model):
     date_time_fixing_values = models.DateTimeField('date and time of fixing weather values')
     air_temperature_sensor = models.SmallIntegerField(default=0)
