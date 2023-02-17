@@ -44,7 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'scales_apiary.apps.ScalesApiaryConfig',
+    'django.contrib.humanize',
 ]
+
+# 'django.contrib.humanize', добавлен 17.02.2023
+# для разделения запятой классов многозначных чисел при выводе в шаблоне
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

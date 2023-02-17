@@ -76,8 +76,13 @@ def weight_page(request):
     
     weight_beehives_all = Weight_2.objects.all()
     
-    print (weight_beehives_all[0])
-    # ▲ данная команда выводит на печать в cmd при запуске сервера
+    a = weight_beehives_all[0]
+
+    print (a)
+    print (type(a))
+    print (a.weight_beehive)
+    print (type(a.weight_beehive))
+    # ▲ данные команды выводят на печать в cmd при запуске сервера
     
     context = {
         'weight_beehive_array': weight_beehives_all[:3]

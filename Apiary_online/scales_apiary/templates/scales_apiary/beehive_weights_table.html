@@ -1,4 +1,10 @@
 {% load static %}
+{% load humanize %}
+<!--
+{% load humanize %} добавлен 17.02.2023
+для разделения запятой классов многозначных чисел при выводе в шаблоне
+-->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -30,7 +36,8 @@
                 <td width="25%">{{el.id}}</td>
                 <td width="25%">{{el.beehive_number_id}}</td>
                 <td width="25%">{{el.date_time_weight_fixation|date:"Y.m.d H:i"}}</td>
-                <td width="25%">{{el.weight_beehive}}</td>
+                <td width="25%">{{el.weight_beehive|intcomma}}</td>
+				<!-- |intcomma => добавлено 17.02.2023 разделение классов запятой в столбце 'Вес улья, гр' -->
             </tr>
             {% endfor %}
         
