@@ -74,16 +74,13 @@ def main_page(request):
     
 def weight_page(request):
     
-    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-          с одним значением в столбце '''
     weight_beehives_all = Weight_2.objects.all()
     
     print (weight_beehives_all[0])
     # ▲ данная команда выводит на печать в cmd при запуске сервера
     
     context = {
-        #'meteo_data_0': str(meteo_data_all[0])
-        'weight_beehive_1': str(weight_beehives_all[1])
+        'weight_beehive_array': weight_beehives_all[:3]
     }
     
     return render(

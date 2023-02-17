@@ -16,7 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # ▲ BASE_DIR переменная, которая получает директорию в которой расположен manage.py
-# Трансляция 2022.02.23 1:15:01
+# Трансляция 2022.03.23 1:15:01
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/

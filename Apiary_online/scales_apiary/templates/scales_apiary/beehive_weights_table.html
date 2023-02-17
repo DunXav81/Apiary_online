@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Weights page </title>
+    <link rel="stylesheet" href = {% static 'css/weight_page.css' %} >
 </head>
 <body>
-    <a href="#"> Таблица привеса ульев </a>
+    <a href="{% url 'main*page' %}"> Таблица метеорологических данных </a>
     <img src="{% static 'img/Cloud.jpg' %}" />
+    <a href="{% url 'weight_page' %}"> Таблица привеса ульев </a>
+    <a href="#"> Таблица данных о пчелиных семьях </a>
     <div class="weight">
         <table>
         
@@ -22,7 +25,7 @@
                 <th> Вес улья, гр </th>
             </tr>
         
-            {% for el in beehive_weights_data_array %}
+            {% for el in weight_beehive_array %}
             <tr>
                 <td width="25%">{{el.id}}</td>
                 <td width="25%">{{el.beehive_number_id}}</td>
