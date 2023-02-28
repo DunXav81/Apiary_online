@@ -76,7 +76,7 @@ def weight_page(request):
     
     weight_beehives_all = Weight_2.objects.all()
     
-    a = weight_beehives_all[0]
+    a = weight_beehives_all[1]
 
     print (a)
     print (type(a))
@@ -93,42 +93,3 @@ def weight_page(request):
         'scales_apiary/beehive_weights_table.html',
         context
     )
-    
-    
-    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-          с множеством значений в одном столбце
-    meteo_data_all = Weather_3.objects.all()
-    
-    context = {
-        #'meteo_data_0': str(meteo_data_all[0])
-        'meteo_data_array': meteo_data_all
-    }
-    
-    return render(
-        request,
-        'scales_apiary/meteo_data_table.html',
-        context
-    )
-    '''
-
-    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-              с множеством значений в двух столбцах
-    meteo_data_all = Weather_3.objects.all()
-
-    print (meteo_data_all[0])
-    # ▲ данная команда выводит на печать в cmd при запуске сервера
-
-    row = 3
-    # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
-
-    context = {
-        #'meteo_data_0': str(meteo_data_all[0])
-        'meteo_data_array': meteo_data_all[:row]
-    }
-
-    return render(
-        request,
-        'scales_apiary/meteo_data_table.html',
-        context
-    )
-    '''

@@ -1,13 +1,14 @@
 
-/*
-html {
-	
-}
-*/
-
 body {
 	background-color: green;
     font-family: 'Nunito Sans', sans-serif;
+}
+
+nav {
+	margin-left: 20px;
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }
 
 table {
@@ -32,14 +33,38 @@ td {
 	font-weight: 500;
 }
 
+a {
+	background-color: skyblue;
+	border: 2px solid black;
+	border-radius: 5px;
+	color: darkblue;
+	text-decoration: none;
+	padding: 5px 10px;
+	/* margin-right: 10px; */
+}
+/*
+.header-nav {
+    list-style-type: none; убираем точки ul
+    display: flex;
+    gap: 46px;
+    padding-left: 0;
+}
+.header-nav a.logo_api::after {
+	content: "Источник данных";
+}
+.logo_api::after {
+	content: "Источник данных";
+}
+*/
+.meteo {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
 .weight {
 	padding: 1.2em;
 	margin: 1.2em;
 	background-color: yellow;
 	border: 2px;
 	border-radius: 0.5em;
-}
-
-.left_margin {
-	text-align: left;
 }
