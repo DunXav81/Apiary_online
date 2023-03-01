@@ -2,24 +2,28 @@
 
 <!DOCTYPE html>
 
-<html lang = "en">
+<html lang = "ru">
 
 	<head>
 		<meta charset="UTF-8">
 		<title> Weather page </title>
-		<!-- <script src = {% static "test_static_js.js" %}></script> -->
-		<!-- ▲ Подключение статического контента (Js) ▲ -->
-		<!-- ▼ Возможны также варианты кода ниже ▼ -->
-		<!-- <script src = "{% static 'test_static_js.js' %}"> -->
-		<!-- <script src = "/static/test_static_js.js"> -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
-		<!-- <link rel="stylesheet" href = {% static 'css/main.css' %} > -->
 		<link rel="stylesheet" href = {% static 'css/main_01.css' %} >
 	</head>
 
 	<body>
+		<nav>
+			<a class = "logo_api" href="https://yandex.ru/pogoda/">
+				<img src="{% static 'img/logo_weather_ru_indoor.svg' %}" />
+			</a>
+			<a  class = "meteo" href="{% url 'main*page' %}"> Таблица метеорологических данных
+				<img src="{% static 'img/Cloud.jpg' %}" />
+			</a>
+			<a href="{% url 'weight_page' %}"> Таблица привеса ульев </a>
+			<a href="#"> Таблица данных о пчелиных семьях </a>
+		</nav>
 		<div class="weather">
 			<table>
 				<caption><h2>Таблица метеорологических данных</h2></caption>

@@ -13,36 +13,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title> Weights page </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href = {% static 'css/weight_page.css' %} >
 </head>
 <body>
     <nav>
+        <a class = "logo_api" href="https://yandex.ru/pogoda/">
+            <img src="{% static 'img/logo_weather_ru_indoor.svg' %}" />
+        </a>
         <a  class = "meteo" href="{% url 'main*page' %}"> Таблица метеорологических данных
             <img src="{% static 'img/Cloud.jpg' %}" />
         </a>
         <a href="{% url 'weight_page' %}"> Таблица привеса ульев </a>
         <a href="#"> Таблица данных о пчелиных семьях </a>
-        <a class = "logo_api" href="https://yandex.ru/pogoda/">
-            <img src="{% static 'img/logo_weather_ru_indoor.svg' %}" />
-        </a>
-        <!--
-        <ul class="header-nav">
-            <li>
-                <a class = "meteo" href="{% url 'main*page' %}"> Таблица метеорологических данных
-                    <img src="{% static 'img/Cloud.jpg' %}" />
-                </a>
-            </li>
-            <li><a href="{% url 'weight_page' %}"> Таблица привесов ульев </a></li>
-            <li><a href="#"> Таблица данных о пчелиных семьях </a></li>
-            <li>
-                <a class = "logo_api" href="https://yandex.ru/pogoda/">
-                    <img src="{% static 'img/logo_weather_ru_indoor.svg' %}" />
-                </a>
-            </li>
-        </ul>
-        -->
     </nav>
-
     <div class="weight">
         <table>
         
@@ -68,6 +54,5 @@
 
         </table>
         </div>
-        
 </body>
 </html>
