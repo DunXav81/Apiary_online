@@ -15,46 +15,54 @@ a {
 	color: darkblue;
 	text-decoration: none;
 	padding: 5px 10px;
+	font-weight: 600;
 }
 .meteo {
 	display: flex;
 	gap: 10px;
 	align-items: center;
 }
+.weather {
+	padding: 1.2em;
+	margin: 1.2em;
+	background-color: rgb(30, 255, 0);
+	border: 2px;
+	border-radius: 0.5em;
+}
+caption {
+	position: relative;
+}
 .logo_api {
 	background-color: blueviolet;
 	display: flex;
 	flex-direction: column;
-	width: 10em;
-	margin-right: -1.8em;
+	width: 11em;
+	/* margin-right: -1.8em; */
+	position: absolute;
+	/* top: 10px; */
+	/* left: 10px; */
 }
 .logo_api::after {
 	content: "Источник данных";
 	text-align: center;
 	font-size: 1.2em;
-}
-.weather {
-	padding: 1.2em;
-	margin: 1.2em;
-	background-color: yellow;
-	border: 2px;
-	border-radius: 0.5em;
+	font-weight: 800;
 }
 table {
 	width: 100%;
 	border: 3px solid blue;
-	font-weight: bold;
 	border-radius: 0.5em;
 }
 th {
 	background: steelblue;
+	font-weight: 600;
 }
 td {
 	text-align: center;
 	vertical-align:middle;
-	background:rgb(133, 85, 223);
+	background:white;
 	font-size: 0.8em;
-	font-weight: 500;
+	font-weight: 400;
 }
 .left_margin {
 	text-align: left;

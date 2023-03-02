@@ -8,51 +8,44 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> Weights page </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href = {% static 'css/weight_page.css' %} >
-</head>
-<body>
-    <nav>
-        <a class = "logo_api" href="https://yandex.ru/pogoda/">
-            <img src="{% static 'img/logo_weather_ru_indoor.svg' %}" />
-        </a>
-        <a  class = "meteo" href="{% url 'main*page' %}"> Таблица метеорологических данных
-            <img src="{% static 'img/Cloud.jpg' %}" />
-        </a>
-        <a href="{% url 'weight_page' %}"> Таблица привесов ульев </a>
-        <a href="#"> Таблица данных о пчелиных семьях </a>
-    </nav>
-    <div class="weight">
-        <table>
-        
-            <caption><h2>Таблица привесов ульев</h2></caption>
-        
-            <tr>
-                <th> Порядковый номер фиксации веса улья (ID) </th>
-                <th> Номер улья </th>
-                <th> Дата и время фиксации веса улья </th>
-                <th> Вес улья, гр </th>
-            </tr>
-        
-            {% for el in weight_beehive_array %}
-            <tr>
-                <td width="25%">{{el.id}}</td>
-                <td width="25%">{{el.beehive_number_id}}</td>
-                <td width="25%">{{el.date_time_weight_fixation|date:"Y.m.d H:i"}}</td>
-                <td width="25%">{{el.weight_beehive|intspace}}</td>
-				<!-- |intcomma => добавлено 17.02.2023 разделение классов запятой в столбце 'Вес улья, гр' -->
-				<!-- |intspace => добавлено 17.02.2023 разделение классов пробелом в столбце 'Вес улья, гр' -->
-            </tr>
-            {% endfor %}
-
-        </table>
-        </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Weights page </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href = {% static 'css/weight_page.css' %} >
+    </head>
+    <body>
+        <nav>
+            <a  class = "meteo" href="{% url 'main*page' %}"> Таблица метеорологических данных
+                <img src="{% static 'img/Cloud.jpg' %}" />
+            </a>
+            <a href="{% url 'weight_page' %}"> Таблица привесов ульев </a>
+            <a href="#"> Таблица данных о пчелиных семьях </a>
+        </nav>
+        <div class="weight">
+            <table>
+                <caption><h2>Таблица привесов ульев</h2></caption>
+                <tr>
+                    <th> Порядковый номер фиксации веса улья (ID) </th>
+                    <th> Номер улья </th>
+                    <th> Дата и время фиксации веса улья </th>
+                    <th> Вес улья, гр </th>
+                </tr>
+                {% for el in weight_beehive_array %}
+                <tr>
+                    <td width="25%">{{el.id}}</td>
+                    <td width="25%">{{el.beehive_number_id}}</td>
+                    <td width="25%">{{el.date_time_weight_fixation|date:"Y.m.d H:i"}}</td>
+                    <td width="25%">{{el.weight_beehive|intspace}}</td>
+                    <!-- |intcomma => добавлено 17.02.2023 разделение классов запятой в столбце 'Вес улья, гр' -->
+                    <!-- |intspace => добавлено 17.02.2023 разделение классов пробелом в столбце 'Вес улья, гр' -->
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+    </body>
 </html>
