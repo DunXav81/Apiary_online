@@ -10,12 +10,19 @@ nav {
 }
 a {
 	background-color: skyblue;
-	border: 2px solid black;
+	border: 2px solid gray;
 	border-radius: 5px;
 	color: darkblue;
 	text-decoration: none;
 	padding: 5px 10px;
 	font-weight: 600;
+}
+a.active {
+	border: 2px solid black;
+}
+nav a:hover {
+	background-color: steelblue;
+	color: white;
 }
 .meteo {
 	display: flex;
