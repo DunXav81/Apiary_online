@@ -8,19 +8,15 @@ from .models import Weight_2
 
 def main_page(request):
 
-    ''' ▼ Вывод в браузер текстового сообщения
+    ''' ▼ Вывод в браузер текстового сообщения ▼
     return HttpResponse("<b>The main page of the site!!!</b>")
-    '''
-    
-    ''' ▼ Вывод в браузер показания датчика температуры
+        ▼ Вывод в браузер показания датчика температуры ▼
     meteo_data_all = Weather_3.objects.all()
     return HttpResponse("<b>%s</b>" % ('Температура воздуха равна ' + 
         str(meteo_data_all[1]) + ' °C'
     ))
-    '''
-    
-    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-          с одним значением в столбце
+        ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+          с одним значением в столбце ▼
     meteo_data_all = Weather_3.objects.all()
     
     context = {
@@ -32,27 +28,23 @@ def main_page(request):
         request,
         'scales_apiary/meteo_data_table.html',
         context
-    )
-    '''
+    )    
+       ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+         с множеством значений в одном столбце ▼
     
-    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-          с множеством значений в одном столбце
     meteo_data_all = Weather_3.objects.all()
-    
     context = {
         #'meteo_data_0': str(meteo_data_all[0])
         'meteo_data_array': meteo_data_all
     }
-    
     return render(
         request,
         'scales_apiary/meteo_data_table.html',
         context
     )
     '''
-
-    ''' ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-              с множеством значений в двух столбцах'''
+    #   ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+    #     с множеством значений в двух столбцах
     meteo_data_all = Weather_3.objects.all()
 
     print (meteo_data_all[0])
@@ -93,3 +85,25 @@ def weight_page(request):
         'scales_apiary/beehive_weights_table.html',
         context
     )
+
+def test_request(request):
+
+    return render(
+        request,
+        'scales_apiary/test_request.html'
+    )
+    
+def test_response(request):
+    '''
+    name = request.GET ('name')
+    phone = request.GET ('phone')
+    context = {
+        'name': name,
+        'phone': phone
+    }
+    '''
+    return render(
+        request,
+        'scales_apiary/test_response.html',
+    )
+    
