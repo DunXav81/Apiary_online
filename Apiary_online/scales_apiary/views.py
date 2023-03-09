@@ -3,8 +3,9 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.http import HttpResponse
-from .models import Weather_3
+from .models import Bienenkonigin_1
 from .models import Weight_2
+from .models import Weather_3
 
 def main_page(request):
 
@@ -50,7 +51,7 @@ def main_page(request):
     print (meteo_data_all[0])
     # ▲ данная команда выводит на печать в cmd при запуске сервера
 
-    row = 3
+    row = 5
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
@@ -66,6 +67,10 @@ def main_page(request):
     
 def weight_page(request):
     
+    # r = requests.get()
+    # data = r.json()
+    #    Weather_3.objects.create(date_time_fixing_values=data.get('time'), )
+
     weight_beehives_all = Weight_2.objects.all()
     
     a = weight_beehives_all[1]
@@ -77,7 +82,7 @@ def weight_page(request):
     # ▲ данные команды выводят на печать в cmd при запуске сервера
     
     context = {
-        'weight_beehive_array': weight_beehives_all[:3]
+        'weight_beehive_array': weight_beehives_all[:4]
     }
     
     return render(
@@ -94,16 +99,16 @@ def test_request(request):
     )
     
 def test_response(request):
-    '''
-    name = request.GET ('name')
-    phone = request.GET ('phone')
+
+    name = request.GET ['name']
+    phone = request.GET ['phone']
     context = {
         'name': name,
         'phone': phone
     }
-    '''
+
     return render(
         request,
         'scales_apiary/test_response.html',
+        context
     )
-    

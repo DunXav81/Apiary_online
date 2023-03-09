@@ -12,6 +12,10 @@ class Bienenkonigin_1(models.Model):
     muttervolk = models.CharField(max_length=20)
     drohnenvolker = models.CharField(max_length=20)
 
+    def __str__(self):
+        return (f'ID={(self.id)}; улей № {(self.beehive_number)}; матка № {(self.zeichen_konigin)}; '
+        f'начало засева {(self.eiablage_seit)}; порода {(self.konigin_rasse)}; линия {(self.konigin_linie)}; '
+        f'материнская линия {(self.muttervolk)}; отцовская линия {(self.drohnenvolker)}')
 
 class Weight_2(models.Model):
     beehive_number = models.ForeignKey(Bienenkonigin_1, on_delete=models.DO_NOTHING)
