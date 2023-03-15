@@ -13,17 +13,21 @@ class Bienenkonigin_1(models.Model):
     drohnenvolker = models.CharField(max_length=20)
 
     def __str__(self):
-        return (f'ID={(self.id)}; улей № {(self.beehive_number)}; матка № {(self.zeichen_konigin)}; '
+        return (f'id={(self.id)}; улей № {(self.beehive_number)}; матка № {(self.zeichen_konigin)}; '
         f'начало засева {(self.eiablage_seit)}; порода {(self.konigin_rasse)}; линия {(self.konigin_linie)}; '
         f'материнская линия {(self.muttervolk)}; отцовская линия {(self.drohnenvolker)}')
 
+# , unique=True
+
 class Weight_2(models.Model):
-    beehive_number = models.ForeignKey(Bienenkonigin_1, on_delete=models.DO_NOTHING)
+    beehive_number = models.ForeignKey(Bienenkonigin_1, on_delete=models.DO_NOTHING) 
     date_time_weight_fixation = models.DateTimeField('date and time of weighing')
     weight_beehive = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f'{(self.id)}; {(self.beehive_number)}; {(self.date_time_weight_fixation)}; {(self.weight_beehive)}'
+        return f'id={(self.id)}; улей № {(self.beehive_number.beehive_number)}; {(self.date_time_weight_fixation)}; {(self.weight_beehive)}'
+
+# , to_field='beehive_number'
         
 class Weather_3(models.Model):
     date_time_fixing_values = models.DateTimeField('date and time of fixing weather values')
@@ -37,7 +41,7 @@ class Weather_3(models.Model):
     weather_description_api = models.CharField(max_length=100)
     
     def __str__(self):
-        return str(self.id) + "; " + str(self.date_time_fixing_values) + "; " + str(self.air_temperature_sensor) + "; " + str(
+        return "id=" + str(self.id) + "; " + str(self.date_time_fixing_values) + "; " + str(self.air_temperature_sensor) + "; " + str(
         self.air_temperature_api) + "; " + str(self.air_humidity_sensor) + "; " + str(self.air_humidity_api) + "; " + str(
         self.atmospheric_pressure_api) + "; " + str(self.wind_power_api) + "; " +  str(self.wind_direction_api) + "; " + str(
         self.weather_description_api)

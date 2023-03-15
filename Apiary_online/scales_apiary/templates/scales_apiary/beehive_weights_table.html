@@ -38,11 +38,12 @@
                 {% for el in weight_beehive_array %}
                 <tr>
                     <td width="25%">{{el.id}}</td>
-                    <td width="25%">{{el.beehive_number_id}}</td>
+                    <td width="25%">{{el.beehive_number.beehive_number}}</td>
                     <td width="25%">{{el.date_time_weight_fixation|date:"Y.m.d H:i"}}</td>
                     <td width="25%">{{el.weight_beehive|intspace}}</td>
                     <!-- |intcomma => добавлено 17.02.2023 разделение классов запятой в столбце 'Вес улья, гр' -->
                     <!-- |intspace => добавлено 17.02.2023 разделение классов пробелом в столбце 'Вес улья, гр' -->
+					<!-- {{el.beehive_number_id}} -->
                 </tr>
                 {% endfor %}
             </table>

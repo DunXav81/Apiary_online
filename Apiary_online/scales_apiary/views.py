@@ -79,10 +79,14 @@ def weight_page(request):
     print (type(a))
     print (a.weight_beehive)
     print (type(a.weight_beehive))
+    print (a.beehive_number)
+    print (type(a.beehive_number))
+    print (a.beehive_number.beehive_number)
+    print (type(a.beehive_number.beehive_number))
     # ▲ данные команды выводят на печать в cmd при запуске сервера
     
     context = {
-        'weight_beehive_array': weight_beehives_all[:4]
+        'weight_beehive_array': weight_beehives_all[:7]
     }
     
     return render(
