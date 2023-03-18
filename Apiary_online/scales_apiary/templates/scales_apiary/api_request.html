@@ -1,9 +1,16 @@
+<!--
+{% load static %}
+-->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--
+	<script src={% static 'js/test_static_js_2.js' %}> </script>
+	-->
     <title>API Request</title>
 </head>
 <body>
@@ -20,7 +27,19 @@
 		</p>
 		<p>
 			<label>язык ответа</label>
-			<input name="lang_" value='' placeholder='en_US'>
+			<input name="lang_" value='' placeholder='ru_RU'>
+		</p>
+		<p>
+			<label>количество дней в прогнозе, включая текущий (max = 7)</label>
+			<input name="limit_" value=1>
+		</p>
+		<p>
+			<label>прогноз погоды по часам</label>
+			<input name="hours_" value=false>
+		</p>
+		<p>
+			<label>расширенная информация об осадках</label>
+			<input name="extra_" value='' placeholder='true'>
 		</p>
         <button type="submit">Отправить</button>
     </form>

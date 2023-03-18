@@ -131,17 +131,20 @@ def api_weather_response(request):
     lat = request.GET ['lat_']
     lon = request.GET ['lon_']
     lang = request.GET ['lang_']
+    limit = request.GET ['limit_']
+    hours = request.GET ['hours_']
+    extra = request.GET ['extra_']
 
-    url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}"
+    url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}&limit={limit}&hours={hours}"
     # X-Yandex-API-Key: + API_WEATHER_KEY
     header={'X-Yandex-API-Key': API_WEATHER_KEY}
 
     r = requests.get(url, headers=header)
     data = r.json()
 
-    print (r)
+    print (r, type(r))
     print (url)
-    # print(data, type(data)) <class 'dict'>
+    print(data, type(data)) #  <class 'dict'>
     # print (r.now_dt) -> выдал Fatal Python error:
 
     context = {
