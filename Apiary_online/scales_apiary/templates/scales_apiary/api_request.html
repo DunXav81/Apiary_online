@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request</title>
+</head>
+<body>
+    <h1>Данная страница предназначена для отправки запросов на API Яндекс.Погоды</h1>
+    <h2>▼ Здесь ▼ происходит формирование данных запроса</h2>
+	<form action="{% url 'api*response' %}" method="">
+		<p>
+			<label>широта</label>
+			<input name="lat_" value='56.235616'>
+		</p>
+		<p>
+			<label>долгота</label>
+			<input name="lon_" value='36.847135'>
+		</p>
+		<p>
+			<label>язык ответа</label>
+			<input name="lang_" value='' placeholder='en_US'>
+		</p>
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+</html>

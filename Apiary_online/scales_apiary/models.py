@@ -17,7 +17,9 @@ class Bienenkonigin_1(models.Model):
         f'начало засева {(self.eiablage_seit)}; порода {(self.konigin_rasse)}; линия {(self.konigin_linie)}; '
         f'материнская линия {(self.muttervolk)}; отцовская линия {(self.drohnenvolker)}')
 
-# , unique=True
+# unique = True ► атрибут указывает, что значение должно быть уникальным.
+# null = True ► в ячейке таблицы БД значение поля будет равно null, если не передадётся значение поля в модели.
+# blank = True ► поле будет необязательным к заполнению.
 
 class Weight_2(models.Model):
     beehive_number = models.ForeignKey(Bienenkonigin_1, on_delete=models.DO_NOTHING) 
@@ -26,8 +28,6 @@ class Weight_2(models.Model):
 
     def __str__(self):
         return f'id={(self.id)}; улей № {(self.beehive_number.beehive_number)}; {(self.date_time_weight_fixation)}; {(self.weight_beehive)}'
-
-# , to_field='beehive_number'
         
 class Weather_3(models.Model):
     date_time_fixing_values = models.DateTimeField('date and time of fixing weather values')

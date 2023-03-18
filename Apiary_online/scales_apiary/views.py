@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from .models import Bienenkonigin_1
 from .models import Weight_2
 from .models import Weather_3
+import requests
+from Apiary_online.keys.api_key import API_WEATHER_KEY
 
 def main_page(request):
 
@@ -99,7 +101,7 @@ def test_request(request):
 
     return render(
         request,
-        'scales_apiary/test_request.html'
+        'scales_apiary/test_request.html',
     )
     
 def test_response(request):
@@ -116,3 +118,42 @@ def test_response(request):
         'scales_apiary/test_response.html',
         context
     )
+
+def api_weather_request(request):
+
+    return render(
+        request,
+        'scales_apiary/api_request.html',
+    )
+
+def api_weather_response(request):
+
+    lat = request.GET ['lat_']
+    lon = request.GET ['lon_']
+    lang = request.GET ['lang_']
+
+    url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}"
+    # X-Yandex-API-Key: + API_WEATHER_KEY
+    header={'X-Yandex-API-Key': API_WEATHER_KEY}
+
+    r = requests.get(url, headers=header)
+    data = r.json()
+
+    print (r)
+    print (url)
+    # print(data, type(data)) <class 'dict'>
+    # print (r.now_dt) -> выдал Fatal Python error:
+
+    context = {
+        'lat_rp': lat,
+        'lon_rp': lon,
+        'lang_rp': lang,
+        'json_pj': r,
+    }
+
+    return render(
+        request,
+        'scales_apiary/api_response.html',
+        context
+    )
+
