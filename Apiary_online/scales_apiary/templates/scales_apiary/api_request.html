@@ -15,31 +15,31 @@
 </head>
 <body>
     <h1>Данная страница предназначена для отправки запросов на API Яндекс.Погоды</h1>
-    <h2>▼ Здесь ▼ происходит формирование данных запроса</h2>
+    <h2>▼ Здесь происходит формирование данных запроса ▼</h2>
 	<form action="{% url 'api*response' %}" method="">
 		<p>
 			<label>широта</label>
-			<input name="lat_" value='56.235616'>
+			<input name="lat_" value="56.235616">
 		</p>
 		<p>
 			<label>долгота</label>
-			<input name="lon_" value='36.847135'>
+			<input name="lon_" value="36.847135">
 		</p>
 		<p>
 			<label>язык ответа</label>
-			<input name="lang_" value='' placeholder='ru_RU'>
+			<input name="lang_" value="" placeholder="ru_RU">
 		</p>
 		<p>
 			<label>количество дней в прогнозе, включая текущий (max = 7)</label>
-			<input name="limit_" value=1>
+			<input name="limit_" value="1">
 		</p>
 		<p>
 			<label>прогноз погоды по часам</label>
-			<input name="hours_" value=false>
+			<input name="hours_" value="false">
 		</p>
 		<p>
 			<label>расширенная информация об осадках</label>
-			<input name="extra_" value='' placeholder='true'>
+			<input name="extra_" value="" placeholder="true">
 		</p>
         <button type="submit">Отправить</button>
     </form>

@@ -8,6 +8,7 @@ from .models import Weight_2
 from .models import Weather_3
 import requests
 from Apiary_online.keys.api_key import API_WEATHER_KEY
+import json
 
 def main_page(request):
 
@@ -141,17 +142,37 @@ def api_weather_response(request):
 
     r = requests.get(url, headers=header)
     data = r.json()
-
-    print (r, type(r))
-    print (url)
-    print(data, type(data)) #  <class 'dict'>
+    
+    # json_object = json.dumps(data, indent = 4, ensure_ascii=False)
+    # ensure_ascii=False => отмена экранирования ascii символов
+    # print(json_object)
+    # ▲ Преобразование данных в формат json и вывод на печать ▲
+    
+    obs_time = data["fact"]["obs_time"]
+    locality_name = data["geo_object"]["locality"]["name"]
+    province_name = data["geo_object"]["province"]["name"]
+    country_name = data["geo_object"]["country"]["name"]
+    
+    print (f'Дата и время сервера в UTC = {data["now_dt"]}')
+    print (type(data["now_dt"]))
+    # print (f'Вывод значения ключа "info" => {data["info"]}')
+    # print (type(data["info"]))
+    # print (f'Вывод значения ключа "info"/"tzinfo" => {data["info"]["tzinfo"]}')
+    # print (type(data["info"]["tzinfo"]))
+    # print (r, type(r))
+    # print (url)
+    # print(data, type(data)) #  <class 'dict'>
     # print (r.now_dt) -> выдал Fatal Python error:
-
+   
     context = {
         'lat_rp': lat,
         'lon_rp': lon,
         'lang_rp': lang,
         'json_pj': r,
+        'obs_time_rp': obs_time,
+        'locality_name_rp': locality_name,
+        'province_name_rp': province_name,
+        'country_name_rp': country_name,
     }
 
     return render(
