@@ -9,6 +9,7 @@ from .models import Weather_3
 import requests
 from Apiary_online.keys.api_key import API_WEATHER_KEY
 import json
+import datetime
 
 def main_page(request):
 
@@ -51,10 +52,14 @@ def main_page(request):
     #     с множеством значений в двух столбцах
     meteo_data_all = Weather_3.objects.all()
 
+    a = meteo_data_all[1]
+    print (a.date_time_fixing_values)
+    print (type(a.date_time_fixing_values))
+
     print (meteo_data_all[0])
     # ▲ данная команда выводит на печать в cmd при запуске сервера
 
-    row = 5
+    row = 10
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
@@ -149,17 +154,76 @@ def api_weather_response(request):
     # ▲ Преобразование данных в формат json и вывод на печать ▲
     
     obs_time = data["fact"]["obs_time"]
+    date_time = datetime.datetime.fromtimestamp(obs_time)
+    # print(date_time)
+    # print (type(date_time)) # <class 'datetime.datetime'>
+
+    date_time_format = date_time.strftime('%Y.%m.%d %H:%M')
+    # print(date_time_format)
+    # print (type(date_time_format)) # <class 'str'>
+
     locality_name = data["geo_object"]["locality"]["name"]
     province_name = data["geo_object"]["province"]["name"]
     country_name = data["geo_object"]["country"]["name"]
+    temperature_api = data["fact"]["temp"]
+    humidity_api = data["fact"]["humidity"]
+    pressure_api = data["fact"]["pressure_mm"]
+
+    wind_power_api_tenth = data["fact"]["wind_speed"]
+    wind_power_api_whole = round(wind_power_api_tenth, 0)
+
+    wind_direction_api_upp = data["fact"]["wind_dir"]
+    wind_direction_api_cap = wind_direction_api_upp.upper()
+
+    weather_description_api_en = data["fact"]["condition"]
+    dict_translat_weather_description = {
+        "clear": "ясно",
+        "partly-cloudy": "малооблачно",
+        "cloudy": "облачно с прояснениями",
+        "overcast": "пасмурно",
+        "drizzle": "морось",
+        "light-rain": "небольшой дождь",
+        "rain": "дождь",
+        "moderate-rain": "умеренно сильный дождь",
+        "heavy-rain": "сильный дождь",
+        "continuous-heavy-rain": "длительный сильный дождь",
+        "showers": "ливень",
+        "wet-snow": "дождь со снегом",
+        "light-snow": "небольшой снег",
+        "snow": "снег",
+        "snow-showers": "снегопад",
+        "hail": "град",
+        "thunderstorm": "гроза",
+        "thunderstorm-with-rain": "дождь с грозой",
+        "thunderstorm-with-hail": "гроза с градом"
+    }
+    weather_description_api_ru = dict_translat_weather_description[weather_description_api_en]
+
+    def upcase_first_letter(s):
+        return s[0].upper() + s[1:]
+
+    weather_description_api_ru_f_l = upcase_first_letter(weather_description_api_ru)
+
+    p = Weather_3.objects.create(
+        date_time_fixing_values = date_time,
+        air_temperature_api = temperature_api,
+        air_humidity_api = humidity_api,
+        atmospheric_pressure_api = pressure_api,
+        wind_power_api = wind_power_api_whole,
+        wind_direction_api = wind_direction_api_cap,
+        weather_description_api = weather_description_api_ru_f_l
+        )
     
+    print (wind_power_api_tenth)
+    print (wind_power_api_whole)
+    print (f'Описание погоды: {weather_description_api_ru}')
     print (f'Дата и время сервера в UTC = {data["now_dt"]}')
-    print (type(data["now_dt"]))
+    print (type(data["now_dt"])) # <class 'str'>
     # print (f'Вывод значения ключа "info" => {data["info"]}')
     # print (type(data["info"]))
     # print (f'Вывод значения ключа "info"/"tzinfo" => {data["info"]["tzinfo"]}')
     # print (type(data["info"]["tzinfo"]))
-    # print (r, type(r))
+    print (r, type(r)) # <Response [200]> <class 'requests.models.Response'>
     # print (url)
     # print(data, type(data)) #  <class 'dict'>
     # print (r.now_dt) -> выдал Fatal Python error:
@@ -170,6 +234,7 @@ def api_weather_response(request):
         'lang_rp': lang,
         'json_pj': r,
         'obs_time_rp': obs_time,
+        'date_time_format_rp': date_time_format,
         'locality_name_rp': locality_name,
         'province_name_rp': province_name,
         'country_name_rp': country_name,

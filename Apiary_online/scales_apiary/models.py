@@ -31,14 +31,14 @@ class Weight_2(models.Model):
         
 class Weather_3(models.Model):
     date_time_fixing_values = models.DateTimeField('date and time of fixing weather values')
-    air_temperature_sensor = models.SmallIntegerField(default=0)
-    air_temperature_api = models.SmallIntegerField(default=0)
-    air_humidity_sensor = models.PositiveSmallIntegerField(default=0)
-    air_humidity_api = models.PositiveSmallIntegerField(default=0)
-    atmospheric_pressure_api = models.PositiveSmallIntegerField(default=0)
-    wind_power_api = models.PositiveSmallIntegerField(default=0)
-    wind_direction_api = models.CharField(max_length=20)
-    weather_description_api = models.CharField(max_length=100)
+    air_temperature_sensor = models.SmallIntegerField(null = True)
+    air_temperature_api = models.SmallIntegerField(null = True)
+    air_humidity_sensor = models.PositiveSmallIntegerField(null = True)
+    air_humidity_api = models.PositiveSmallIntegerField(null = True)
+    atmospheric_pressure_api = models.PositiveSmallIntegerField(null = True)
+    wind_power_api = models.PositiveSmallIntegerField(null = True)
+    wind_direction_api = models.CharField(max_length=20, blank = True)
+    weather_description_api = models.CharField(max_length=100, blank = True)
     
     def __str__(self):
         return "id=" + str(self.id) + "; " + str(self.date_time_fixing_values) + "; " + str(self.air_temperature_sensor) + "; " + str(
