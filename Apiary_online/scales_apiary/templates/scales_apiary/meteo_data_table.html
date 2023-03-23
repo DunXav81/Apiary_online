@@ -16,7 +16,7 @@
 	<body>
 		<nav>
 			<a  class = "meteo active" href="{% url 'main*page' %}"> Таблица метеорологических данных
-				<img src="{% static 'img/bkn_-ra_d.png' %}" />
+				<!-- <img src="{% static 'img/bkn_-ra_d.png' %}" /> -->
 			</a>
 			<a href="{% url 'weight_page' %}"> Таблица привесов ульев </a>
 			<a href="#"> Таблица данных о пчелиных семьях </a>
@@ -30,7 +30,7 @@
 					<h2>Таблица метеорологических данных</h2>
 				</caption>
 				<tr>
-					<th> Порядковый номер фиксации метео данных (ID) </th>
+					<th> ID </th>
 					<th> Дата и время фиксации метео данных </th>
 					<th> Температура воздуха (датчик), °C </th>
 					<th> Температура воздуха (API), °C </th>
@@ -48,16 +48,21 @@
 
 				{% for el in meteo_data_array %}
 				<tr>
-					<td width="8.5%">{{el.id}}</td>
-					<td width="12.7%">{{el.date_time_fixing_values|date:"Y.m.d H:i"}}</td>
-					<td width="11.9%">{{el.air_temperature_sensor}}</td>
+					<td width="2.5%">{{el.id}}</td>
+					<td width="10.7%">{{el.date_time_fixing_values|date:"Y.m.d H:i"}}</td>
+					<td width="9.9%">{{el.air_temperature_sensor}}</td>
 					<td width="10.2%">{{el.air_temperature_api}}</td>
-					<td width="11.0%">{{el.air_humidity_sensor}}</td>
-					<td width="9.3%">{{el.air_humidity_api}}</td>
+					<td width="9.0%">{{el.air_humidity_sensor}}</td>
+					<td width="8.3%">{{el.air_humidity_api}}</td>
 					<td width="11.0%">{{el.atmospheric_pressure_api}}</td>
 					<td width="5.2%">{{el.wind_power_api}}</td>
-					<td width="5.9%">{{el.wind_direction_api}}</td>
-					<td width="14.3%" class = "left_margin">
+					<td width="8.9%">
+						<div class="wind_direction_column">
+						{{el.wind_direction_api}}
+						<img src="{% static 'img/wind/S.png' %}" alt="восточный">
+						</div>
+					</td>
+					<td width="24.3%" class = "left_margin">
 						<div class="last_column">
 						{{el.weather_description_api}} <img src="{% static 'img/ovc.png' %}" alt="тучка">
 						</div>

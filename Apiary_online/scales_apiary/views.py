@@ -59,7 +59,7 @@ def main_page(request):
     print (meteo_data_all[0])
     # ▲ данная команда выводит на печать в cmd при запуске сервера
 
-    row = 10
+    row = 15
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
@@ -174,6 +174,9 @@ def api_weather_response(request):
 
     wind_direction_api_upp = data["fact"]["wind_dir"]
     wind_direction_api_cap = wind_direction_api_upp.upper()
+    wind_direction_ico_url = "{% static 'img/wind/" + wind_direction_api_cap + ".png' %}"
+    print (wind_direction_ico_url)
+    print (type(wind_direction_ico_url))
 
     weather_description_api_en = data["fact"]["condition"]
     dict_translat_weather_description = {
@@ -217,16 +220,17 @@ def api_weather_response(request):
     print (wind_power_api_tenth)
     print (wind_power_api_whole)
     print (f'Описание погоды: {weather_description_api_ru}')
+    print (f'Иконка погоды: {(data["fact"]["icon"])}')
     print (f'Дата и время сервера в UTC = {data["now_dt"]}')
-    print (type(data["now_dt"])) # <class 'str'>
+    # print (type(data["now_dt"])) # <class 'str'>
     # print (f'Вывод значения ключа "info" => {data["info"]}')
     # print (type(data["info"]))
     # print (f'Вывод значения ключа "info"/"tzinfo" => {data["info"]["tzinfo"]}')
     # print (type(data["info"]["tzinfo"]))
-    print (r, type(r)) # <Response [200]> <class 'requests.models.Response'>
+    # print (r, type(r)) # <Response [200]> <class 'requests.models.Response'>
     # print (url)
     # print(data, type(data)) #  <class 'dict'>
-    # print (r.now_dt) -> выдал Fatal Python error:
+    # print (r.now_dt) # Fatal Python error:
    
     context = {
         'lat_rp': lat,

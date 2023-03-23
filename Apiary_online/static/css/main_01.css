@@ -74,6 +74,13 @@ td {
 .left_margin {
 	text-align: left;
 }
+.wind_direction_column {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	justify-content: space-between;
+	height: 1.7em;
+}
 .last_column {
 	display: flex;
 	gap: 10px;
