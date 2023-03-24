@@ -224,7 +224,7 @@ def api_weather_response(request):
         )
     
     print (wind_power_api_tenth)
-    print (wind_power_api_whole)
+    # print (wind_power_api_whole)
     print (f'Описание погоды: {weather_description_api_ru}')
     print (f'Иконка погоды: {(data["fact"]["icon"])}')
     print (f'Дата и время сервера в UTC = {data["now_dt"]}')

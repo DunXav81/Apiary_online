@@ -37,7 +37,7 @@
 					<th> Влажность воздуха (датчик), % </th>
 					<th> Влажность воздуха (API), % </th>
 					<th> Атмосферное давление (API), мм рт. ст. </th>
-					<th> Сила ветра (API), м/с </th>
+					<th> Сила ветра/порывы ветра (API), м/с </th>
 					<th> Направление ветра (API) </th>
 					<th> Описание погоды (API) </th>
 				</tr>
@@ -55,7 +55,7 @@
 					<td width="9.0%">{{el.air_humidity_sensor}}</td>
 					<td width="8.3%">{{el.air_humidity_api}}</td>
 					<td width="11.0%">{{el.atmospheric_pressure_api}}</td>
-					<td width="5.2%">{{el.wind_power_api}}</td>
+					<td width="7.2%">{{el.wind_power_api}}/{{el.wind_gust_api}}</td>
 					<td width="8.9%">
 						<div class="wind_direction_column">
 						{{el.wind_direction_api}}
@@ -64,7 +64,7 @@
 						el.wind_direction_ico_url -->
 						</div>
 					</td>
-					<td width="24.3%" class = "left_margin">
+					<td width="22.3%" class = "left_margin">
 						<div class="last_column">
 						{{el.weather_description_api}}
 						<img src="{% static el.weather_description_ico_url %}" alt="тучка">
