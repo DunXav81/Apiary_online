@@ -38,6 +38,7 @@ class Weather_3(models.Model):
     atmospheric_pressure_api = models.PositiveSmallIntegerField(null = True)
     wind_power_api = models.PositiveSmallIntegerField(null = True)
     wind_direction_api = models.CharField(max_length=20, blank = True)
+    wind_direction_ico_url = models.CharField(max_length=100, blank = True)
     weather_description_api = models.CharField(max_length=100, blank = True)
     
     def __str__(self):

@@ -77,6 +77,7 @@ td {
 .wind_direction_column {
 	display: flex;
 	align-items: center;
+	padding: 0 1.0em;
 	gap: 10px;
 	justify-content: space-between;
 	height: 1.7em;

@@ -59,12 +59,15 @@
 					<td width="8.9%">
 						<div class="wind_direction_column">
 						{{el.wind_direction_api}}
-						<img src="{% static 'img/wind/S.png' %}" alt="восточный">
+						<img src="{% static el.wind_direction_ico_url %}" alt="восточный">
+						<!-- "{{el.wind_direction_ico_url}}" "{% static 'img/wind/S.png' %}"
+						el.wind_direction_ico_url -->
 						</div>
 					</td>
 					<td width="24.3%" class = "left_margin">
 						<div class="last_column">
-						{{el.weather_description_api}} <img src="{% static 'img/ovc.png' %}" alt="тучка">
+						{{el.weather_description_api}}
+						<img src="{% static 'img/ovc.png' %}" alt="тучка">
 						</div>
 					</td>
 				</tr>

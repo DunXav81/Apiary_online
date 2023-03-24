@@ -59,12 +59,12 @@ def main_page(request):
     print (meteo_data_all[0])
     # ▲ данная команда выводит на печать в cmd при запуске сервера
 
-    row = 15
+    row = 20
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
         #'meteo_data_0': str(meteo_data_all[0])
-        'meteo_data_array': meteo_data_all[:row]
+        'meteo_data_array': meteo_data_all[:row],
     }
 
     return render(
@@ -174,7 +174,7 @@ def api_weather_response(request):
 
     wind_direction_api_upp = data["fact"]["wind_dir"]
     wind_direction_api_cap = wind_direction_api_upp.upper()
-    wind_direction_ico_url = "{% static 'img/wind/" + wind_direction_api_cap + ".png' %}"
+    wind_direction_ico_url = "img/wind/" + wind_direction_api_cap + ".png"
     print (wind_direction_ico_url)
     print (type(wind_direction_ico_url))
 
@@ -214,6 +214,7 @@ def api_weather_response(request):
         atmospheric_pressure_api = pressure_api,
         wind_power_api = wind_power_api_whole,
         wind_direction_api = wind_direction_api_cap,
+        wind_direction_ico_url = wind_direction_ico_url,
         weather_description_api = weather_description_api_ru_f_l
         )
     
