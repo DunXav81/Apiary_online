@@ -59,7 +59,7 @@ def main_page(request):
     print (meteo_data_all[0])
     # ▲ данная команда выводит на печать в cmd при запуске сервера
 
-    row = 20
+    row = 30
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
@@ -170,7 +170,8 @@ def api_weather_response(request):
     pressure_api = data["fact"]["pressure_mm"]
 
     wind_power_api_tenth = data["fact"]["wind_speed"]
-    wind_power_api_whole = round(wind_power_api_tenth, 0)
+    # wind_power_api_whole = round(wind_power_api_tenth, 0)
+    wind_gust_api = data["fact"]["wind_gust"]
 
     wind_direction_api_upp = data["fact"]["wind_dir"]
     wind_direction_api_cap = wind_direction_api_upp.upper()
@@ -207,15 +208,19 @@ def api_weather_response(request):
 
     weather_description_api_ru_f_l = upcase_first_letter(weather_description_api_ru)
 
+    weather_description_ico_url = "img/weather_description/32/" + data["fact"]["icon"] + ".png"
+
     p = Weather_3.objects.create(
         date_time_fixing_values = date_time,
         air_temperature_api = temperature_api,
         air_humidity_api = humidity_api,
         atmospheric_pressure_api = pressure_api,
-        wind_power_api = wind_power_api_whole,
+        wind_power_api = wind_power_api_tenth,
+        wind_gust_api = wind_gust_api,
         wind_direction_api = wind_direction_api_cap,
         wind_direction_ico_url = wind_direction_ico_url,
-        weather_description_api = weather_description_api_ru_f_l
+        weather_description_api = weather_description_api_ru_f_l,
+        weather_description_ico_url = weather_description_ico_url
         )
     
     print (wind_power_api_tenth)
