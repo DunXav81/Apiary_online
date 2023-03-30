@@ -48,22 +48,44 @@ def main_page(request):
         context
     )
     '''
-    #   ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
-    #     с множеством значений в двух столбцах
+
+    '''
+    # ▼ Упорядочивание данных по возрастанию id в таблице БД и таблице шаблона
+    def restoring_order(min_id, max_id, excluded_id): # , excluded_id
+        for i in range(min_id, max_id):
+            if i in excluded_id: # in [19, 23]:
+                print (f'Элемент с id={i} отсутствует')
+                continue
+            obj_id = Weather_3.objects.get(id=i)
+            print (obj_id)
+            # obj_id.save()
+
+    min_id = 1
+    max_id = 19
+    excluded_id = [19, 23] # [19, 23]
+
+    # restoring_order(min_id, max_id, excluded_id) # , excluded_id
+    '''
+
+    # ▼ Использование шаблона "meteo_data_table" для вывода в браузер таблицы метеоданных
+    #   с множеством значений в двух столбцах
+
     meteo_data_all = Weather_3.objects.all()
 
     a = meteo_data_all[1]
+
     print (a.date_time_fixing_values)
     print (type(a.date_time_fixing_values))
+    # print (meteo_data_all[0])
+    # ▲ данные команды выводит на печать в cmd при запуске сервера
 
-    print (meteo_data_all[0])
-    # ▲ данная команда выводит на печать в cmd при запуске сервера
-
-    row = 30
+    row = 40
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
         #'meteo_data_0': str(meteo_data_all[0])
+        #'meteo_data_array': meteo_data_all[5:row],
+        #'meteo_data_array': meteo_data_all,
         'meteo_data_array': meteo_data_all[:row],
     }
 
@@ -80,7 +102,7 @@ def weight_page(request):
     #    Weather_3.objects.create(date_time_fixing_values=data.get('time'), )
 
     weight_beehives_all = Weight_2.objects.all()
-    
+
     a = weight_beehives_all[1]
 
     print (a)
@@ -153,7 +175,7 @@ def api_weather_response(request):
     # print(json_object)
     # ▲ Преобразование данных в формат json и вывод на печать ▲
     
-    obs_time = data["fact"]["obs_time"]
+    obs_time = data["fact"]["obs_time"] # ◄ время замера погодных данных в формате Unixtime
     date_time = datetime.datetime.fromtimestamp(obs_time)
     # print(date_time)
     # print (type(date_time)) # <class 'datetime.datetime'>
@@ -162,8 +184,8 @@ def api_weather_response(request):
     # print(date_time_format)
     # print (type(date_time_format)) # <class 'str'>
 
-    locality_name = data["geo_object"]["locality"]["name"]
-    province_name = data["geo_object"]["province"]["name"]
+    locality_name = data["geo_object"]["locality"]["name"] # ◄ название населенного пункта
+    province_name = data["geo_object"]["province"]["name"] # ◄ название региона
     country_name = data["geo_object"]["country"]["name"]
     temperature_api = data["fact"]["temp"]
     humidity_api = data["fact"]["humidity"]
@@ -210,6 +232,8 @@ def api_weather_response(request):
 
     weather_description_ico_url = "img/weather_description/32/" + data["fact"]["icon"] + ".png"
 
+    daytime_api = data["fact"]["daytime"]
+
     p = Weather_3.objects.create(
         date_time_fixing_values = date_time,
         air_temperature_api = temperature_api,
@@ -220,7 +244,8 @@ def api_weather_response(request):
         wind_direction_api = wind_direction_api_cap,
         wind_direction_ico_url = wind_direction_ico_url,
         weather_description_api = weather_description_api_ru_f_l,
-        weather_description_ico_url = weather_description_ico_url
+        weather_description_ico_url = weather_description_ico_url,
+        daytime_api = daytime_api
         )
     
     print (wind_power_api_tenth)

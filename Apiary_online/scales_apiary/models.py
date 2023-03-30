@@ -42,6 +42,10 @@ class Weather_3(models.Model):
     wind_direction_ico_url = models.CharField(max_length=100, blank = True)
     weather_description_api = models.CharField(max_length=100, blank = True)
     weather_description_ico_url = models.CharField(max_length=100, blank = True)
+    daytime_api = models.CharField(max_length=1, blank = True)
+
+    class Meta:
+        ordering = ['id']
     
     def __str__(self):
         return "id=" + str(self.id) + "; " + str(self.date_time_fixing_values) + "; " + str(self.air_temperature_sensor) + "; " + str(
