@@ -79,14 +79,16 @@ def main_page(request):
     # print (meteo_data_all[0])
     # ▲ данные команды выводит на печать в cmd при запуске сервера
 
-    row = 40
+    row = 24
     # ▲ данная переменная задаёт количество строк в "таблице метеорологических данных"
 
     context = {
-        #'meteo_data_0': str(meteo_data_all[0])
-        #'meteo_data_array': meteo_data_all[5:row],
         #'meteo_data_array': meteo_data_all,
-        'meteo_data_array': meteo_data_all[:row],
+        #'meteo_data_0': str(meteo_data_all[0]),
+        #'meteo_data_array': meteo_data_all[:row],
+        #'meteo_data_array': meteo_data_all[5:row],
+        #'meteo_data_array': meteo_data_all.reverse()[:row],
+        'meteo_data_array': meteo_data_all[meteo_data_all.count()-row:],
     }
 
     return render(
@@ -154,39 +156,11 @@ def api_weather_request(request):
         'scales_apiary/api_request.html',
     )
 
-def api_weather_response(request):
+def writing_values_database(data):
 
-    lat = request.GET ['lat_']
-    lon = request.GET ['lon_']
-    lang = request.GET ['lang_']
-    limit = request.GET ['limit_']
-    hours = request.GET ['hours_']
-    extra = request.GET ['extra_']
-
-    url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}&limit={limit}&hours={hours}"
-    # X-Yandex-API-Key: + API_WEATHER_KEY
-    header={'X-Yandex-API-Key': API_WEATHER_KEY}
-
-    r = requests.get(url, headers=header)
-    data = r.json()
-    
-    # json_object = json.dumps(data, indent = 4, ensure_ascii=False)
-    # ensure_ascii=False => отмена экранирования ascii символов
-    # print(json_object)
-    # ▲ Преобразование данных в формат json и вывод на печать ▲
-    
     obs_time = data["fact"]["obs_time"] # ◄ время замера погодных данных в формате Unixtime
     date_time = datetime.datetime.fromtimestamp(obs_time)
-    # print(date_time)
-    # print (type(date_time)) # <class 'datetime.datetime'>
 
-    date_time_format = date_time.strftime('%Y.%m.%d %H:%M')
-    # print(date_time_format)
-    # print (type(date_time_format)) # <class 'str'>
-
-    locality_name = data["geo_object"]["locality"]["name"] # ◄ название населенного пункта
-    province_name = data["geo_object"]["province"]["name"] # ◄ название региона
-    country_name = data["geo_object"]["country"]["name"]
     temperature_api = data["fact"]["temp"]
     humidity_api = data["fact"]["humidity"]
     pressure_api = data["fact"]["pressure_mm"]
@@ -198,8 +172,6 @@ def api_weather_response(request):
     wind_direction_api_upp = data["fact"]["wind_dir"]
     wind_direction_api_cap = wind_direction_api_upp.upper()
     wind_direction_ico_url = "img/wind/" + wind_direction_api_cap + ".png"
-    print (wind_direction_ico_url)
-    print (type(wind_direction_ico_url))
 
     weather_description_api_en = data["fact"]["condition"]
     dict_translat_weather_description = {
@@ -247,12 +219,48 @@ def api_weather_response(request):
         weather_description_ico_url = weather_description_ico_url,
         daytime_api = daytime_api
         )
-    
-    print (wind_power_api_tenth)
+
+def api_weather_response(request):
+
+    lat = request.GET ['lat_']
+    lon = request.GET ['lon_']
+    lang = request.GET ['lang_']
+    limit = request.GET ['limit_']
+    hours = request.GET ['hours_']
+    extra = request.GET ['extra_']
+
+    url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}&limit={limit}&hours={hours}"
+    # X-Yandex-API-Key: + API_WEATHER_KEY
+    header={'X-Yandex-API-Key': API_WEATHER_KEY}
+
+    r = requests.get(url, headers=header)
+    data = r.json()
+
+    # json_object = json.dumps(data, indent = 4, ensure_ascii=False)
+    # ensure_ascii=False => отмена экранирования ascii символов
+    # print(json_object)
+    # ▲ Преобразование данных в формат json и вывод на печать ▲
+
+    obs_time = data["fact"]["obs_time"] # ◄ время замера погодных данных в формате Unixtime
+    date_time = datetime.datetime.fromtimestamp(obs_time)
+    # print(date_time)
+    # print (type(date_time)) # <class 'datetime.datetime'>
+
+    date_time_format = date_time.strftime('%Y.%m.%d %H:%M')
+    # print(date_time_format)
+    # print (type(date_time_format)) # <class 'str'>
+
+    locality_name = data["geo_object"]["locality"]["name"] # ◄ название населенного пункта
+    province_name = data["geo_object"]["province"]["name"] # ◄ название региона
+    country_name = data["geo_object"]["country"]["name"]
+
+    writing_values_database(data)
+
+    # print (wind_power_api_tenth)
     # print (wind_power_api_whole)
-    print (f'Описание погоды: {weather_description_api_ru}')
-    print (f'Иконка погоды: {(data["fact"]["icon"])}')
-    print (f'Дата и время сервера в UTC = {data["now_dt"]}')
+    # print (f'Описание погоды: {weather_description_api_ru}')
+    # print (f'Иконка погоды: {(data["fact"]["icon"])}')
+    # print (f'Дата и время сервера в UTC = {data["now_dt"]}')
     # print (type(data["now_dt"])) # <class 'str'>
     # print (f'Вывод значения ключа "info" => {data["info"]}')
     # print (type(data["info"]))
@@ -262,6 +270,8 @@ def api_weather_response(request):
     # print (url)
     # print(data, type(data)) #  <class 'dict'>
     # print (r.now_dt) # Fatal Python error:
+    # print (wind_direction_ico_url)
+    # print (type(wind_direction_ico_url))
    
     context = {
         'lat_rp': lat,

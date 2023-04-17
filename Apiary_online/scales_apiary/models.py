@@ -12,6 +12,9 @@ class Bienenkonigin_1(models.Model):
     muttervolk = models.CharField(max_length=20)
     drohnenvolker = models.CharField(max_length=20)
 
+    class Meta:
+        ordering = ['beehive_number']
+
     def __str__(self):
         return (f'id={(self.id)}; улей № {(self.beehive_number)}; матка № {(self.zeichen_konigin)}; '
         f'начало засева {(self.eiablage_seit)}; порода {(self.konigin_rasse)}; линия {(self.konigin_linie)}; '
@@ -26,23 +29,26 @@ class Weight_2(models.Model):
     date_time_weight_fixation = models.DateTimeField('date and time of weighing')
     weight_beehive = models.PositiveIntegerField(default=1)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return f'id={(self.id)}; улей № {(self.beehive_number.beehive_number)}; {(self.date_time_weight_fixation)}; {(self.weight_beehive)}'
         
 class Weather_3(models.Model):
-    date_time_fixing_values = models.DateTimeField('date and time of fixing weather values')
-    air_temperature_sensor = models.SmallIntegerField(null = True)
-    air_temperature_api = models.SmallIntegerField(null = True)
-    air_humidity_sensor = models.PositiveSmallIntegerField(null = True)
-    air_humidity_api = models.PositiveSmallIntegerField(null = True)
-    atmospheric_pressure_api = models.PositiveSmallIntegerField(null = True)
-    wind_power_api = models.DecimalField(null = True, max_digits=4, decimal_places=1)
-    wind_gust_api = models.DecimalField(null = True, max_digits=4, decimal_places=1)
-    wind_direction_api = models.CharField(max_length=20, blank = True)
+    date_time_fixing_values = models.DateTimeField(verbose_name = "Дата/Время")
+    air_temperature_sensor = models.SmallIntegerField(null = True, verbose_name = "t(°C)")
+    air_temperature_api = models.SmallIntegerField(null = True, verbose_name = "t(API, °C)")
+    air_humidity_sensor = models.PositiveSmallIntegerField(null = True, verbose_name = "ф(%)")
+    air_humidity_api = models.PositiveSmallIntegerField(null = True, verbose_name = "ф(API, %)")
+    atmospheric_pressure_api = models.PositiveSmallIntegerField(null = True, verbose_name = "p(API)")
+    wind_power_api = models.DecimalField(null = True, max_digits=4, decimal_places=1, verbose_name = "ветер")
+    wind_gust_api = models.DecimalField(null = True, max_digits=4, decimal_places=1, verbose_name = "порывы")
+    wind_direction_api = models.CharField(max_length=20, blank = True, verbose_name = "направление ветра")
     wind_direction_ico_url = models.CharField(max_length=100, blank = True)
-    weather_description_api = models.CharField(max_length=100, blank = True)
+    weather_description_api = models.CharField(max_length=100, blank = True, verbose_name = "описание")
     weather_description_ico_url = models.CharField(max_length=100, blank = True)
-    daytime_api = models.CharField(max_length=1, blank = True)
+    daytime_api = models.CharField(max_length=1, blank = True, verbose_name = "D/N")
 
     class Meta:
         ordering = ['id']
