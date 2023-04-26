@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scales_apiary.apps.ScalesApiaryConfig',
     'django.contrib.humanize',
+    # 'django_apscheduler', # планировщик задач
 ]
 
 # 'django.contrib.humanize', добавлен 17.02.2023
