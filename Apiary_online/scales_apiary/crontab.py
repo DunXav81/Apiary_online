@@ -28,11 +28,50 @@ except Exception as e:
 '''
 
 # Вариант №2 https://www.youtube.com/watch?v=Lzy4G1wZ7NQ
-    
+
+'''
 def scheduler_api():
         print ('Прошло 5 секунд')
-    
+
 def start():
     scheduler = BackgroundScheduler()
     scheduler.add_job(scheduler_api, 'interval', seconds=5)
     scheduler.start()
+'''
+
+# Рабочий вариант
+
+import requests
+from Apiary_online.keys.api_key import API_WEATHER_KEY
+import json
+import datetime
+from .views import writing_values_database
+
+def scheduler_api():
+
+    dt_now = datetime.datetime.now()
+    print ('\nЗдесь ▼ указано текушее время (время запроса)')
+    print(dt_now.strftime("%d.%m.%Y %H:%M:%S"))
+    # print ('')
+
+    lat = 56.235616
+    lon = 36.847135
+    lang = 'ru_RU'
+    limit = 1
+    hours = False
+    extra = True
+
+    url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}&limit={limit}&hours={hours}"
+    # X-Yandex-API-Key: + API_WEATHER_KEY
+    header={'X-Yandex-API-Key': API_WEATHER_KEY}
+
+    r = requests.get(url, headers=header)
+    data = r.json()
+
+    writing_values_database(data)
+
+def start():
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(scheduler_api, 'cron', minute='05', id='task_time')
+    scheduler.start()
+

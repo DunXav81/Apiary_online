@@ -76,6 +76,12 @@ def main_page(request):
 
     print (a.date_time_fixing_values)
     print (type(a.date_time_fixing_values))
+
+    dt_now = datetime.datetime.now()
+    print ('\nЗдесь ▼ указано текушее время')
+    print(dt_now.strftime("%d.%m.%Y %H:%M:%S"))
+    print ('\n')
+
     # print (meteo_data_all[0])
     # ▲ данные команды выводит на печать в cmd при запуске сервера
 
