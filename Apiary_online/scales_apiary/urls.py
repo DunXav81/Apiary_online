@@ -8,4 +8,5 @@ urlpatterns = [
     path('test_response_page/', views.test_response, name='test*response'),
     path('api_request_page/', views.api_weather_request, name='api*request'),
     path('api_response_page/', views.api_weather_response, name='api*response'),
+    path('weight_page/test_chart', views.chart_1, name='test*chart*1'),
 ]

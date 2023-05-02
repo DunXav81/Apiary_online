@@ -11,7 +11,12 @@ admin.site.register(Weight_2)
 @admin.register(Weather_3)
 class WeatherAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_time_fixing_values'
-    list_display = ("id", "date_time_fixing_values", "air_temperature_api",
+
+    @admin.display(description="Дата.Год / Время")
+    def admin_date_time_fixing_values(self, obj):
+        return obj.date_time_fixing_values.strftime('%d.%m.%Y %H:%M')
+
+    list_display = ("id", "admin_date_time_fixing_values", "air_temperature_api",
     "air_humidity_api", "atmospheric_pressure_api", "wind_power_api",
     "wind_gust_api", "wind_direction_api", "weather_description_api", "daytime_api")
     list_per_page = 20

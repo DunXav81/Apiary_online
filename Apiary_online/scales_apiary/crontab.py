@@ -52,7 +52,7 @@ def scheduler_api():
     dt_now = datetime.datetime.now()
     print ('\nЗдесь ▼ указано текушее время (время запроса)')
     print(dt_now.strftime("%d.%m.%Y %H:%M:%S"))
-    # print ('')
+    print ('')
 
     lat = 56.235616
     lon = 36.847135
@@ -72,6 +72,6 @@ def scheduler_api():
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(scheduler_api, 'cron', minute='05', id='task_time')
-    scheduler.start()
+    scheduler.add_job(scheduler_api, 'cron', minute='02', id='task_time')
+    # scheduler.start()
 

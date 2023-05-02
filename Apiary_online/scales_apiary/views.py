@@ -74,13 +74,13 @@ def main_page(request):
 
     a = meteo_data_all[1]
 
-    print (a.date_time_fixing_values)
-    print (type(a.date_time_fixing_values))
+    # print (a.date_time_fixing_values)
+    # print (type(a.date_time_fixing_values))
 
     dt_now = datetime.datetime.now()
     print ('\nЗдесь ▼ указано текушее время')
     print(dt_now.strftime("%d.%m.%Y %H:%M:%S"))
-    print ('\n')
+    print ('')
 
     # print (meteo_data_all[0])
     # ▲ данные команды выводит на печать в cmd при запуске сервера
@@ -297,3 +297,16 @@ def api_weather_response(request):
         context
     )
 
+def chart_1(request):
+
+    d = '01.05.2023'
+
+    context = {
+        'date': d,
+    }
+
+    return render(
+        request,
+        'scales_apiary/test_chart.html',
+        context
+    )
