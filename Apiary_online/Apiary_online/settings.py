@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scales_apiary.apps.ScalesApiaryConfig',
     'django.contrib.humanize',
+    'chartjs', # графики
     # 'django_apscheduler', # планировщик задач
 ]
 
@@ -66,7 +67,9 @@ ROOT_URLCONF = 'Apiary_online.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [], ◄ начальный вариант
+        'DIRS': [r'C:\Apiary_online_virtual_environment\Apiary_online\scales_apiary\templates\scales_apiary'],
+        # ▲ стало 03.05.2023 при интеграции Chart.js
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
