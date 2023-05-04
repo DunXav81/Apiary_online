@@ -1,0 +1,19 @@
+body {
+	background-color: rgb(234, 0, 255);
+    font-family: 'Nunito Sans', sans-serif;
+}
+.charts_test {
+	padding: 1.3em;
+	background-color: rgb(30, 255, 0);
+	border: 2px;
+	border-radius: 0.5em;
+	border-color: red; /* ◄ не работает по состоянию на 03.05.2023 20:03 */
+	position: fixed;
+    top: 4.5em;
+    width: 82%;
+    height: 80%;
+}
+#myChart {
+	width: 600;
+	height: 400;
+}

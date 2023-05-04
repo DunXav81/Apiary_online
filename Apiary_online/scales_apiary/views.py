@@ -139,7 +139,7 @@ def test_request(request):
         request,
         'scales_apiary/test_request.html',
     )
-    
+
 def test_response(request):
 
     name = request.GET ['name']
@@ -311,27 +311,51 @@ def chart_1(request):
         context
     )
 
-# Графики
+# Графики (тестовый режим)
+# ▼ ▼ ▼ ▼ ▼
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
+
+
+row = 24
+
+last_row = Weather_3.objects.order_by("-id")[0:row]
+
+start_chart_timeline = last_row[row-1].date_time_fixing_values
+end_chart_timeline = last_row[0].date_time_fixing_values
+
+    # print (start_chart_timeline)
+    # print (end_chart_timeline)
+
+timeline_values = []
+for value in reversed(last_row):
+    timeline_values.append(value.date_time_fixing_values.strftime('%H:%M'))
+
+    # print (timeline_values[0])
+    # print (timeline_values)
 
 
 class LineChartJSONView(BaseLineChartView):
     def get_labels(self):
         """Return 7 labels for the x-axis."""
-        return ["January", "February", "March", "April", "May", "June", "July"]
+        return timeline_values
+        # return ["January", "February", "March", "April", "May", "June", "July"]
 
     def get_providers(self):
         """Return names of datasets."""
-        return ["Central", "Eastside", "Westside"]
+        return ["Температура,°C"]
+        # return ["Температура,°C", "Влажность воздуха,%", "Атмосферное давление, мм рт. ст."]
 
     def get_data(self):
         """Return 3 datasets to plot."""
+        return [[3, 5, 6, 7, 8, 9, 10, 10, 10, 11, 12, 13, 12, 11, 10, 10, 9, 8, 7, 7, 6, 6, 5, 5]]
 
-        return [[75, 44, 92, 11, 44, 95, 35],
-                [41, 92, 18, 3, 73, 87, 92],
-                [87, 21, 94, 3, 90, 13, 65]]
-
+'''
+        return [[75, 44, 92, 25, 44, 95, 35],
+                [41, 92, 28, 43, 73, 87, 92],
+                [87, 21, 94, 36, 90, 40, 65]]
+'''
 
 line_chart = TemplateView.as_view(template_name='test_chart.html')
 line_chart_json = LineChartJSONView.as_view()
+# ▲ ▲ ▲ ▲ ▲

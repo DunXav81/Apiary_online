@@ -7,12 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Chart</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href={% static 'css/test_chart.css' %} >
 </head>
 <body>
-    <!-- <p>Сегодня {{date}}</p> -->
-	<h1>Some Line Charts loaded in Ajax!</h1>
+	<h2>Линейная диаграмма (метеоданные)!</h2>
 
-        <canvas id="myChart" width="500" height="400"></canvas>
+		<div class="charts_test">
+		    <canvas id="myChart"></canvas>
+		</div>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>

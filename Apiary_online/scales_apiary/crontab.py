@@ -74,4 +74,5 @@ def start():
     scheduler = BackgroundScheduler()
     scheduler.add_job(scheduler_api, 'cron', minute='12', id='task_time')
     scheduler.start()
+    scheduler.shutdown()
 
