@@ -324,18 +324,30 @@ last_row = Weather_3.objects.order_by("-id")[0:row]
 start_chart_timeline = last_row[row-1].date_time_fixing_values
 end_chart_timeline = last_row[0].date_time_fixing_values
 
-    # print (start_chart_timeline)
-    # print (end_chart_timeline)
+# print (start_chart_timeline)
+# print (end_chart_timeline)
 
 timeline_values = []
+temperature_values = []
+temperature_min = []
+temperature_optim_min = []
+temperature_optim_max = []
+humidity_values = []
+
 for value in reversed(last_row):
-    timeline_values.append(value.date_time_fixing_values.strftime('%H:%M'))
+    timeline_values.append(value.date_time_fixing_values.strftime('%Y.%m.%d %H:%M'))
+    temperature_values.append(value.air_temperature_api)
+    temperature_min.append(10)
+    temperature_optim_min.append(16)
+    temperature_optim_max.append(25)
+    humidity_values.append(value.air_humidity_api)
 
-    # print (timeline_values[0])
-    # print (timeline_values)
-
+# print (timeline_values[0])
+# print (timeline_values)
+print (temperature_values)
 
 class LineChartJSONView(BaseLineChartView):
+
     def get_labels(self):
         """Return 7 labels for the x-axis."""
         return timeline_values
@@ -343,12 +355,12 @@ class LineChartJSONView(BaseLineChartView):
 
     def get_providers(self):
         """Return names of datasets."""
-        return ["Температура,°C"]
+        return ["Температура,°C", "MIN,°C", "Optimal MIN,°C", "Optimal MAX,°C"]
         # return ["Температура,°C", "Влажность воздуха,%", "Атмосферное давление, мм рт. ст."]
 
     def get_data(self):
         """Return 3 datasets to plot."""
-        return [[3, 5, 6, 7, 8, 9, 10, 10, 10, 11, 12, 13, 12, 11, 10, 10, 9, 8, 7, 7, 6, 6, 5, 5]]
+        return [temperature_values, temperature_min, temperature_optim_min, temperature_optim_max]
 
 '''
         return [[75, 44, 92, 25, 44, 95, 35],
@@ -358,4 +370,19 @@ class LineChartJSONView(BaseLineChartView):
 
 line_chart = TemplateView.as_view(template_name='test_chart.html')
 line_chart_json = LineChartJSONView.as_view()
+
+class LineChartJSONViewH(BaseLineChartView):
+
+    def get_labels(self):
+        return timeline_values
+
+    def get_providers(self):
+        return ["Влажность,%"]
+
+    def get_data(self):
+        return [humidity_values]
+
+line_chart = TemplateView.as_view(template_name='test_chart.html')
+line_chart_json = LineChartJSONViewH.as_view()
+
 # ▲ ▲ ▲ ▲ ▲
