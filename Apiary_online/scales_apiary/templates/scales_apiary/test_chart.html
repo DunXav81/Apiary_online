@@ -13,15 +13,17 @@
 	<link rel="stylesheet" href={% static 'css/test_chart.css' %} >
 </head>
 <body>
-	<h2>Линейная диаграмма (метеоданные)!</h2>
+	<h3><span>Линейная диаграмма (температура)!</span></h3>
 
 		<div class="charts_test">
 		    <canvas id="myChart"></canvas>
 		</div>
 
+        <!--
 		<div class="humidity_chart">
 		    <canvas id="myChartHumidity"></canvas>
 		</div>
+		-->
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
         <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
@@ -34,6 +36,8 @@
                 });
             });
         </script>
+
+		<!--
 		<script type="text/javascript">
             $.get('{% url "line_chart_json" %}', function(data) {
                 var ctx = $("myChartHumidity").get(0).getContext("2d");
@@ -43,5 +47,7 @@
                 });
             });
         </script>
+		-->
+
 </body>
 </html>

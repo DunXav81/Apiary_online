@@ -1,26 +1,41 @@
 body {
-	background-color: rgb(234, 0, 255);
-    font-family: 'Nunito Sans', sans-serif;
+	background-image: url("/static/img/background/full_med-1-kg.jpg");
+	background-attachment: fixed; /* Фон фиксируется при прокрутке страницы */
+	background-repeat: no-repeat; /* Изображение не повторяется */
+	min-height:100%;
+	background-size: cover; /*Максимальное масштабирование изображения с сохранением пропорций */
+	font-family: 'Nunito Sans', sans-serif;
 }
+
+span {
+	border-radius: 6px;
+	border: 2px solid steelblue;
+	padding: 5px;
+	background-color: #fdff7b;
+	opacity: 0.8; /* Прозрачность */
+}
+
 .charts_test {
-	padding: 1.3em;
-	background-color: rgb(30, 255, 0);
-	border: 2px;
+	background-color: #c2ff60;
+	opacity: 0.9; /* Прозрачность */
 	border-radius: 0.5em;
-	border-color: red; /* ◄ не работает по состоянию на 03.05.2023 20:03 */
-	position: fixed;
-    top: 4.5em;
+	border: 2px solid steelblue;
+	padding: 0.5em;
     width: 82%;
-    height: 80%;
+    height: 82%;
 }
+
+/*
 #myChart {
 	width: 600;
 	height: 400;
 }
+*/
 
+/*
 .humidity_chart {
 	padding: 1.3em;
-	background-color: rgb(32, 178, 170);
+	background-color: rgb(30, 255, 0);
 	border: 2px;
 	border-radius: 0.5em;
 	border-color: rgb(0, 128, 128);
@@ -33,3 +48,4 @@ body {
 	width: 600;
 	height: 400;
 }
+*/

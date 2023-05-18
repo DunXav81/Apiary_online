@@ -78,7 +78,7 @@ def main_page(request):
     # print (type(a.date_time_fixing_values))
 
     dt_now = datetime.datetime.now()
-    print ('\nЗдесь ▼ указано текушее время')
+    print ('\nЗдесь ▼ указано текущее время')
     print(dt_now.strftime("%d.%m.%Y %H:%M:%S"))
     print ('')
 
@@ -344,7 +344,7 @@ for value in reversed(last_row):
 
 # print (timeline_values[0])
 # print (timeline_values)
-print (temperature_values)
+# print (temperature_values)
 
 class LineChartJSONView(BaseLineChartView):
 
@@ -355,7 +355,7 @@ class LineChartJSONView(BaseLineChartView):
 
     def get_providers(self):
         """Return names of datasets."""
-        return ["Температура,°C", "MIN,°C", "Optimal MIN,°C", "Optimal MAX,°C"]
+        return ["Температура API,°C", "MIN,°C", "Optimal MIN,°C", "Optimal MAX,°C"]
         # return ["Температура,°C", "Влажность воздуха,%", "Атмосферное давление, мм рт. ст."]
 
     def get_data(self):
@@ -371,6 +371,7 @@ class LineChartJSONView(BaseLineChartView):
 line_chart = TemplateView.as_view(template_name='test_chart.html')
 line_chart_json = LineChartJSONView.as_view()
 
+'''
 class LineChartJSONViewH(BaseLineChartView):
 
     def get_labels(self):
@@ -384,5 +385,23 @@ class LineChartJSONViewH(BaseLineChartView):
 
 line_chart = TemplateView.as_view(template_name='test_chart.html')
 line_chart_json = LineChartJSONViewH.as_view()
+'''
 
 # ▲ ▲ ▲ ▲ ▲
+
+def line_chart_humidity(request):
+
+    a = datetime.datetime.now()
+    d = a.strftime('%d.%m.%Y %H:%M')
+    print (type(d))
+
+    context = {
+        'current_datetime': d,
+    }
+
+    return render(
+        request,
+        'scales_apiary/chart_humidity.html',
+        context
+    )
+

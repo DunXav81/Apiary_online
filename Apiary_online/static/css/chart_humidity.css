@@ -1,0 +1,22 @@
+body {
+	background-color: rgb(234, 0, 255);
+    font-family: 'Nunito Sans', sans-serif;
+}
+.humidity_chart {
+	padding: 1.3em;
+	background-color: rgb(32, 178, 170);
+	border: 2px;
+	border-radius: 0.5em;
+	border-color: red; /* ◄ не работает по состоянию на 03.05.2023 20:03 */
+	position: fixed;
+    top: 4.5em;
+    width: 80%;
+    height: 80%;
+}
+
+/*
+#myChartHumidity {
+	width: 600;
+	height: 400;
+}
+*/

@@ -12,4 +12,5 @@ urlpatterns = [
     # path('weight_page/test_chart', views.chart_1, name='test*chart*1'),
     path('chart', line_chart, name='line_chart'),
     path('chartJSON', line_chart_json, name='line_chart_json'),
+    path('chart_humidity', views.line_chart_humidity, name='line*chart*humidity'),
 ]
