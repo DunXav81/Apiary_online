@@ -66,7 +66,7 @@ def start():
     scheduler.add_job(scheduler_api, 'cron', minute='04', id='task_time')
     scheduler.add_job(checking_database_entry, 'cron', minute='05', id='checking_database')
     scheduler.start()
-    #scheduler.shutdown()
+    scheduler.shutdown()
 
 
 # Вариант №1 https://russianblogs.com/article/78281604497/

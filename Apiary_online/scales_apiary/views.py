@@ -258,7 +258,7 @@ def api_weather_response(request):
 
     locality_name = data["geo_object"]["locality"]["name"] # ◄ название населенного пункта
     province_name = data["geo_object"]["province"]["name"] # ◄ название региона
-    country_name = data["geo_object"]["country"]["name"]
+    country_name = data["geo_object"]["country"]["name"] # ◄ название страны
 
     writing_values_database(data)
 
@@ -316,37 +316,57 @@ def chart_1(request):
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 
+'''
+def index(request):
+    return render(request, "index.html")
 
-row = 24
+def postuser(request):
+    # получаем из данных запроса POST отправленные через форму данные
+    name = request.POST.get("name", "Undefined")
+    age = request.POST.get("age", 1)
+    return HttpResponse(f"<h2>Name: {name}  Age: {age}</h2>")
+'''
+def values_temperature_chart(row):
+    row = row # ◄ количество значений на диаграмме
 
-last_row = Weather_3.objects.order_by("-id")[0:row]
+    last_row = Weather_3.objects.order_by("-id")[0:row]
 
-start_chart_timeline = last_row[row-1].date_time_fixing_values
-end_chart_timeline = last_row[0].date_time_fixing_values
+    start_chart_timeline = last_row[row-1].date_time_fixing_values
+    end_chart_timeline = last_row[0].date_time_fixing_values
 
-# print (start_chart_timeline)
-# print (end_chart_timeline)
+    # print (start_chart_timeline)
+    # print (end_chart_timeline)
 
-timeline_values = []
-temperature_values = []
-temperature_min = []
-temperature_optim_min = []
-temperature_optim_max = []
-humidity_values = []
+    timeline_values = []
+    temperature_values = []
+    temperature_min = []
+    temperature_optim_min = []
+    temperature_optim_max = []
+    humidity_values = []
 
-for value in reversed(last_row):
-    timeline_values.append(value.date_time_fixing_values.strftime('%Y.%m.%d %H:%M'))
-    temperature_values.append(value.air_temperature_api)
-    temperature_min.append(10)
-    temperature_optim_min.append(16)
-    temperature_optim_max.append(25)
-    humidity_values.append(value.air_humidity_api)
+    for value in reversed(last_row):
+        timeline_values.append(value.date_time_fixing_values.strftime('%Y.%m.%d %H:%M'))
+        temperature_values.append(value.air_temperature_api)
+        temperature_min.append(10)
+        temperature_optim_min.append(16)
+        temperature_optim_max.append(25)
+        humidity_values.append(value.air_humidity_api)
+
+        list_temperature_values = [temperature_values, temperature_min, temperature_optim_min, temperature_optim_max]
+
+    return timeline_values, list_temperature_values
 
 # print (timeline_values[0])
 # print (timeline_values)
 # print (temperature_values)
 
+# row_test = request.POST.get("quantity", 24)
+
+timeline_values, list_temperature_values = values_temperature_chart(24)
+
 class LineChartJSONView(BaseLineChartView):
+
+    # timeline_values, temperature_values, temperature_min, temperature_optim_min, temperature_optim_max = values_temperature_chart(24)
 
     def get_labels(self):
         """Return 7 labels for the x-axis."""
@@ -360,7 +380,7 @@ class LineChartJSONView(BaseLineChartView):
 
     def get_data(self):
         """Return 3 datasets to plot."""
-        return [temperature_values, temperature_min, temperature_optim_min, temperature_optim_max]
+        return list_temperature_values
 
 '''
         return [[75, 44, 92, 25, 44, 95, 35],

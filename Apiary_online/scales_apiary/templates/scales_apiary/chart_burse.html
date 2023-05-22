@@ -8,5 +8,42 @@
 </head>
 <body>
     <h1>Диаграмма</h1>
+    <canvas></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Получение контекста для рисования
+        let canvas = window.document.querySelector('canvas');
+        let context = canvas.getContext('2d');
+        // Функции
+        const createLineChart = (xData, yData) => {
+            let data = {
+                labels: xData,
+                datasets: [{
+                    data: yData
+                }]
+            }
+            let config = {
+                type: 'line',
+                data: data
+            }
+            let chart = new Chart(context, config);
+        }
+        // Получение данных с сервера
+        // https://www.alphavantage.co/query?function=ALUMINUM&interval=monthly&apikey=demo
+        axios.get('https://www.alphavantage.co/query?function=ALUMINUM&interval=monthly&apikey=demo')
+        .then((response)=>{
+            // console.log(response);
+            let data = response.data.data;
+            let xData = [];
+            let yData = [];
+            for (let i = 0; i < data.length; i++){
+                // console.log(`x = ${data[i].date}, y = ${data[i].value}`);
+                xData.push(data[i].date);
+                yData.push(data[i].value);
+            }
+            createLineChart = (xData, yData);
+        });
+    </script>
 </body>
 </html>

@@ -8,8 +8,9 @@ function cry() {
 cry();
 */
 
-// var dt = 'Линейная диаграмма (метеоданные, влажность) по состоянию на ' + datetime;
-// console.log (typeof datetime);
+var dt = 'Линейная диаграмма (метеоданные, влажность) по состоянию на ' + datetime;
+console.log (typeof dt);
+console.log (typeof datetime);
 // console.log(datetime);
 // var d = datetime;
 // console.log (typeof d);
@@ -50,8 +51,9 @@ var myChart = new Chart(ctx, {
         },
         title: {
             display: true,
-			//text: dt,
-            text: 'Линейная диаграмма (метеоданные, влажность) по состоянию на ',
+			text: dt,
+			//text: 'dt',
+            // text: 'Линейная диаграмма (метеоданные, влажность) по состоянию на ',
             position: 'top',
             fontSize: 16,
             padding: 20
